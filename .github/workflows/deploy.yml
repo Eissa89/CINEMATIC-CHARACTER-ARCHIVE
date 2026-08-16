@@ -4,7 +4,6 @@ on:
   push:
     branches:
       - main
-      - feat/bilingual-character-identity-2916916773836437784
   workflow_dispatch:
 
 permissions:
