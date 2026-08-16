@@ -10,7 +10,7 @@ async function runQa() {
     }
   });
 
-  await page.goto('http://localhost:3000/');
+  await page.goto('http://localhost:3000/CINEMATIC-CHARACTER-ARCHIVE/');
   await page.waitForTimeout(1000);
 
   // Take initial English screenshot
