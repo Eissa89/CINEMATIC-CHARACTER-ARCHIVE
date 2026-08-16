@@ -9,12 +9,29 @@ test('Verify Hero component and interactive bilingual character name switch', as
     }
   });
 
-  await page.goto('http://localhost:3000/');
+  const failedRequests: string[] = [];
+  page.on('requestfailed', (req) => {
+    failedRequests.push(`${req.url()} - ${req.failure()?.errorText}`);
+  });
+
+  page.on('response', (res) => {
+    if (res.status() >= 400) {
+      failedRequests.push(`${res.url()} returned HTTP ${res.status()}`);
+    }
+  });
+
+  await page.goto('http://localhost:3000/CINEMATIC-CHARACTER-ARCHIVE/');
   await page.waitForLoadState('networkidle');
 
   // Verify English name displayed initially
-  const enName = page.locator('text="LIGHTNING McQUEEN"');
+  const enName = page.locator('text="LIGHTNING McQUEEN"').first();
   await expect(enName).toBeVisible();
+
+  // Verify Hero Image is rendered and loaded
+  const heroImg = page.locator('img[alt="LIGHTNING McQUEEN"]');
+  await expect(heroImg).toBeVisible();
+  const naturalWidth = await heroImg.evaluate((img: HTMLImageElement) => img.naturalWidth);
+  expect(naturalWidth).toBeGreaterThan(0);
 
   // Take screenshot in English state
   await page.screenshot({ path: 'screenshot_en.png', fullPage: true });
@@ -24,7 +41,7 @@ test('Verify Hero component and interactive bilingual character name switch', as
   await page.waitForTimeout(400); // allow transition animation
 
   // Verify Arabic name displayed
-  const arName = page.locator('text="برق بنزين"');
+  const arName = page.locator('text="برق بنزين"').first();
   await expect(arName).toBeVisible();
 
   // Take screenshot in Arabic state
@@ -34,6 +51,7 @@ test('Verify Hero component and interactive bilingual character name switch', as
   const tagline = page.locator('text="«تركيز. سرعة. أنا صاروخ.»"');
   await expect(tagline).toBeVisible();
 
-  // Verify no console errors occurred
+  // Verify no console errors or failed requests occurred
   expect(consoleErrors).toEqual([]);
+  expect(failedRequests).toEqual([]);
 });

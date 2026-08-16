@@ -4,7 +4,7 @@ async function runQa() {
   const browser = await chromium.launch({ headless: true });
   const page = await browser.newPage();
 
-  await page.goto('http://localhost:3000/');
+  await page.goto('http://localhost:3000/CINEMATIC-CHARACTER-ARCHIVE/');
   await page.waitForTimeout(1000);
 
   // Take initial screenshot in /home/jules/verification/

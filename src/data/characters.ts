@@ -33,6 +33,8 @@ export interface CharacterTheme {
   darkBg: string; // e.g. '#050507'
 }
 
+import mcqueenImg from '../assets/mcqueen.jpg';
+
 export interface CharacterData {
   id: string;
   nameEn: string;
@@ -67,7 +69,7 @@ export const CHARACTERS: CharacterData[] = [
     identityAr: 'أسطورة السباقات',
     coreThemes: ['SPEED', 'FOCUS', 'COMPETITION', 'LEGACY', 'MOTION'],
     coreThemesAr: ['سرعة', 'تركيز', 'منافسة', 'إرث', 'حركة'],
-    image: '/assets/mcqueen.jpg',
+    image: mcqueenImg,
     bioEn: 'A 7-time Piston Cup champion who redefined motorsport speed through raw talent, relentless focus, and the legendary wisdom learned on Route 66.',
     bioAr: 'بطل كأس بيستون ٧ مرات الذي أعاد تعريف سرعة رياضة المحركات بفضل موهبته الفذة، وتركيزه المستمر، والحكمة الأسطورية التي اكتسبها على طريق 66.',
     theme: {
@@ -141,7 +143,7 @@ export const CHARACTERS: CharacterData[] = [
     identityAr: 'هودسون هورنيت الرائع',
     coreThemes: ['MASTERY', 'WISDOM', 'DIRT DRIFT', 'CHAMPION'],
     coreThemesAr: ['إتقان', 'حكمة', 'انجراف', 'بطل'],
-    image: '/assets/mcqueen.jpg', // reusable structure fallback image
+    image: mcqueenImg, // reusable structure fallback image
     bioEn: '3-time Piston Cup Champion (1951-1953) on dirt tracks. The legendary mentor who transformed McQueen into a true champion.',
     bioAr: 'بطل كأس بيستون ٣ مرات (١٩٥١-١٩٥٣) على المضامير الترابية. المعلم الأسطوري الذي صنع من برق بنزين بطلاً حقيقياً.',
     theme: {
@@ -170,7 +172,7 @@ export const CHARACTERS: CharacterData[] = [
     identityAr: 'بطلة الجيل الجديد',
     coreThemes: ['NEXT-GEN', 'AGILITY', 'PASSION', 'FUTURE'],
     coreThemesAr: ['الجيل الجديد', 'رشاقة', 'شغف', 'مستقبل'],
-    image: '/assets/mcqueen.jpg',
+    image: mcqueenImg,
     bioEn: 'High-tech trainer turned racing powerhouse, representing the bridge between legendary tradition and cutting-edge racing analytics.',
     bioAr: 'مدربة عالية التقنية تحولت إلى قوة سباق ضاربة، تجسد الجسر بين التقاليد الأسطورية وتحليلات السباق الحديثة.',
     theme: {
