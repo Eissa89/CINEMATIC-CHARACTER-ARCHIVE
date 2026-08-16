@@ -50,20 +50,38 @@ server.listen(4173, async () => {
   });
 
   await page.goto('http://localhost:4173/CINEMATIC-CHARACTER-ARCHIVE/', { waitUntil: 'networkidle' });
-  await page.screenshot({ path: 'dist_preview.png', fullPage: true });
 
-  const images = await page.locator('img').all();
-  console.log('Found image count:', images.length);
-  for (const img of images) {
-    const src = await img.getAttribute('src');
-    const alt = await img.getAttribute('alt');
-    const natWidth = await img.evaluate(i => i.naturalWidth);
-    console.log(`Image src: ${src}, alt: ${alt}, naturalWidth: ${natWidth}`);
+  // Verify English name
+  const bodyTextEn = await page.textContent('body');
+  console.log('Body contains LIGHTNING McQUEEN:', bodyTextEn.includes('LIGHTNING McQUEEN'));
+
+  // Verify McQueen hero image
+  const heroImg = page.locator('img[alt="LIGHTNING McQUEEN"]').first();
+  const heroWidth = await heroImg.evaluate(i => i.naturalWidth);
+  console.log('McQueen hero naturalWidth:', heroWidth);
+
+  // Toggle language to Arabic
+  const arButton = page.locator('button', { hasText: 'العربية' });
+  if (await arButton.isVisible()) {
+    await arButton.click();
+    await page.waitForTimeout(500);
   }
 
-  console.log('Console Errors:', consoleErrors);
-  console.log('Network Errors:', networkErrors);
+  const bodyTextAr = await page.textContent('body');
+  console.log('Contains Arabic title (برق بنزين):', bodyTextAr.includes('برق بنزين'));
+
+  await page.screenshot({ path: 'dist_preview.png', fullPage: true });
+
+  console.log('Console Errors count:', consoleErrors.length);
+  console.log('Network Errors count:', networkErrors.length);
 
   await browser.close();
   server.close();
+
+  if (consoleErrors.length > 0 || networkErrors.length > 0 || heroWidth <= 0 || !bodyTextAr.includes('برق بنزين')) {
+    console.error('VERIFICATION FAILED!');
+    process.exit(1);
+  } else {
+    console.log('VERIFICATION PASSED CLEANLY!');
+  }
 });
