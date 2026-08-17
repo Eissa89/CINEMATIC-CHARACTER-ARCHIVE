@@ -1,3 +1,5 @@
+import mcqueenImg from '../assets/mcqueen.jpg';
+
 export interface CharacterStat {
   label: string;
   labelAr: string;
@@ -5,6 +7,8 @@ export interface CharacterStat {
   valueAr: string;
   detail?: string;
   detailAr?: string;
+  numericValue?: number;
+  suffix?: string;
 }
 
 export interface CharacterTimelineEvent {
@@ -27,13 +31,14 @@ export interface IconicMoment {
 }
 
 export interface CharacterTheme {
-  primaryColor: string; // e.g. '#e10600'
-  secondaryColor: string; // e.g. '#facc15'
-  accentGlow: string; // e.g. 'rgba(225, 6, 0, 0.4)'
-  darkBg: string; // e.g. '#050507'
+  primaryColor: string;
+  secondaryColor: string;
+  bgColor: string;
+  surfaceColor: string;
+  borderColor: string;
+  glowColor: string;
+  focusColor: string;
 }
-
-import mcqueenImg from '../assets/mcqueen.jpg';
 
 export interface CharacterData {
   id: string;
@@ -75,13 +80,16 @@ export const CHARACTERS: CharacterData[] = [
     theme: {
       primaryColor: '#e10600',
       secondaryColor: '#facc15',
-      accentGlow: 'rgba(225, 6, 0, 0.35)',
-      darkBg: '#050507',
+      bgColor: '#050507',
+      surfaceColor: '#0d0d12',
+      borderColor: 'rgba(225, 6, 0, 0.3)',
+      glowColor: 'rgba(225, 6, 0, 0.35)',
+      focusColor: '#facc15',
     },
     stats: [
-      { label: 'TOP SPEED', labelAr: 'السرعة القصوى', value: '200 MPH', valueAr: '٣٢٠ كم/س', detail: 'V8 Racing Engine', detailAr: 'محرك V8 سباقات' },
-      { label: 'PISTON CUPS', labelAr: 'كؤوس بيستون', value: '7 VICTORIES', valueAr: '٧ بطولات', detail: 'Record Holder', detailAr: 'حامل الرقم القياسي' },
-      { label: 'ACCELERATION', labelAr: 'التسارع', value: '0-60 IN 3.2s', valueAr: '٠-١٠٠ في ٣.٢ ث', detail: 'High-Downforce Aero', detailAr: 'ديناميكية هوائية عالية' },
+      { label: 'TOP SPEED', labelAr: 'السرعة القصوى', value: '200 MPH', valueAr: '٣٢٠ كم/س', detail: 'V8 Racing Engine', detailAr: 'محرك V8 سباقات', numericValue: 200, suffix: ' MPH' },
+      { label: 'PISTON CUPS', labelAr: 'كؤوس بيستون', value: '7 VICTORIES', valueAr: '٧ بطولات', detail: 'Record Holder', detailAr: 'حامل الرقم القياسي', numericValue: 7, suffix: ' CUPS' },
+      { label: 'ACCELERATION', labelAr: 'التسارع', value: '0-60 IN 3.2s', valueAr: '٠-١٠٠ في ٣.٢ ث', detail: 'High-Downforce Aero', detailAr: 'ديناميكية هوائية عالية', numericValue: 3.2, suffix: 's' },
       { label: 'RACE TEAM', labelAr: 'فريق السباق', value: 'RUST-EZE 95', valueAr: 'راست-إيز ٩٥', detail: 'Radiator Springs Crew', detailAr: 'طاقم رادياتير سبرينجز' }
     ],
     timeline: [
@@ -97,7 +105,7 @@ export const CHARACTERS: CharacterData[] = [
         title: 'WORLD GRAND PRIX',
         titleAr: 'الجائزة الكبرى العالمية',
         description: 'Competes internationally across Tokyo, Italy, and London, mastering dirt track drifting techniques on global asphalt.',
-        descriptionAr: 'يتافس عالمياً في طوكيو وإيطاليا ولندن، متقناً تقنيات الانجراف على الأسفلت العالمي.'
+        descriptionAr: 'ينافس عالمياً في طوكيو وإيطاليا ولندن، متقناً تقنيات الانجراف على الأسفلت العالمي.'
       },
       {
         year: '2017',
@@ -129,7 +137,7 @@ export const CHARACTERS: CharacterData[] = [
         tag: 'SPORTSMANSHIP'
       }
     ],
-    sponsorsEn: ['RUST-EZE', 'DINoco', 'HUDSON HORNET MOTORS', 'LIGHTYEAR'],
+    sponsorsEn: ['RUST-EZE', 'DINOCO', 'HUDSON HORNET MOTORS', 'LIGHTYEAR'],
     sponsorsAr: ['راست-إيز', 'دينوكو', 'محركات هودسون هورنيت', 'لايتير']
   },
   {
@@ -143,17 +151,20 @@ export const CHARACTERS: CharacterData[] = [
     identityAr: 'هودسون هورنيت الرائع',
     coreThemes: ['MASTERY', 'WISDOM', 'DIRT DRIFT', 'CHAMPION'],
     coreThemesAr: ['إتقان', 'حكمة', 'انجراف', 'بطل'],
-    image: mcqueenImg, // reusable structure fallback image
+    image: mcqueenImg,
     bioEn: '3-time Piston Cup Champion (1951-1953) on dirt tracks. The legendary mentor who transformed McQueen into a true champion.',
     bioAr: 'بطل كأس بيستون ٣ مرات (١٩٥١-١٩٥٣) على المضامير الترابية. المعلم الأسطوري الذي صنع من برق بنزين بطلاً حقيقياً.',
     theme: {
       primaryColor: '#1d4ed8',
       secondaryColor: '#38bdf8',
-      accentGlow: 'rgba(29, 78, 216, 0.35)',
-      darkBg: '#050507',
+      bgColor: '#050714',
+      surfaceColor: '#0b0f24',
+      borderColor: 'rgba(29, 78, 216, 0.3)',
+      glowColor: 'rgba(29, 78, 216, 0.35)',
+      focusColor: '#38bdf8',
     },
     stats: [
-      { label: 'PISTON CUPS', labelAr: 'كؤوس بيستون', value: '3 TITLES', valueAr: '٣ القاب', detail: '1951, 1952, 1953', detailAr: '١٩٥١، ١٩٥٢، ١٩٥٣' },
+      { label: 'PISTON CUPS', labelAr: 'كؤوس بيستون', value: '3 TITLES', valueAr: '٣ القاب', detail: '1951, 1952, 1953', detailAr: '١٩٥١، ١٩٥٢، ١٩٥٣', numericValue: 3, suffix: ' TITLES' },
       { label: 'SPECIALTY', labelAr: 'التخصص', value: 'DIRT DRIFTING', valueAr: 'الانجراف الترابي', detail: 'Twin H-Power', detailAr: 'قوة H المزدوجة' }
     ],
     timeline: [],
@@ -178,11 +189,14 @@ export const CHARACTERS: CharacterData[] = [
     theme: {
       primaryColor: '#eab308',
       secondaryColor: '#f97316',
-      accentGlow: 'rgba(234, 179, 8, 0.35)',
-      darkBg: '#050507',
+      bgColor: '#080703',
+      surfaceColor: '#14120a',
+      borderColor: 'rgba(234, 179, 8, 0.3)',
+      glowColor: 'rgba(234, 179, 8, 0.35)',
+      focusColor: '#f97316',
     },
     stats: [
-      { label: 'TOP SPEED', labelAr: 'السرعة القصوى', value: '210 MPH', valueAr: '٣٣٥ كم/س', detail: 'CRS Simulator Trained', detailAr: 'تدريب محاكي CRS' },
+      { label: 'TOP SPEED', labelAr: 'السرعة القصوى', value: '210 MPH', valueAr: '٣٣٥ كم/س', detail: 'CRS Simulator Trained', detailAr: 'تدريب محاكي CRS', numericValue: 210, suffix: ' MPH' },
       { label: 'VICTORIES', labelAr: 'الانتصارات', value: 'FLORIDA 500', valueAr: 'فلوريدا ٥٠٠', detail: 'Dinoco 51 Legend', detailAr: 'أسطورة دينوكو ٥١' }
     ],
     timeline: [],

@@ -49,7 +49,7 @@ test('Verify Hero component and interactive bilingual character name switch', as
   await page.screenshot({ path: 'screenshot_ar.png', fullPage: true });
 
   // Verify tagline is visible
-  const tagline = page.locator('text="«تركيز. سرعة. أنا صاروخ.»"');
+  const tagline = page.locator('text="«تركيز. سرعة. أنا صاروخ.»"').first();
   await expect(tagline).toBeVisible();
 
   // Verify no console errors or failed requests occurred
