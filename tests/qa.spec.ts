@@ -20,7 +20,8 @@ test('Verify Hero component and interactive bilingual character name switch', as
     }
   });
 
-  await page.goto('http://localhost:3000/CINEMATIC-CHARACTER-ARCHIVE/');
+  const baseUrl = process.env.TARGET_URL || 'http://localhost:4173/';
+  await page.goto(baseUrl);
   await page.waitForLoadState('networkidle');
 
   // Verify English name displayed initially
