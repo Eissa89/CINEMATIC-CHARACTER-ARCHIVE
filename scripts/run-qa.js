@@ -10,7 +10,13 @@ async function runQa() {
     }
   });
 
-  await page.goto('http://localhost:3000/CINEMATIC-CHARACTER-ARCHIVE/');
+  page.on('requestfailed', (request) => {
+    // Ignore favicon 404 or other non-critical fails if any, but log failed request
+    console.warn('Network Request Failed:', request.url(), request.failure()?.errorText);
+  });
+
+  const baseUrl = process.env.TARGET_URL || 'http://localhost:4173/';
+  await page.goto(baseUrl);
   await page.waitForTimeout(1000);
 
   // Take initial English screenshot

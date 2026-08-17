@@ -14,12 +14,9 @@ const mimeTypes = {
 };
 
 const server = http.createServer((req, res) => {
-  let reqUrl = req.url;
-  if (reqUrl.startsWith('/CINEMATIC-CHARACTER-ARCHIVE/')) {
-    reqUrl = reqUrl.replace('/CINEMATIC-CHARACTER-ARCHIVE/', '/');
-  }
+  let reqUrl = req.url.split('?')[0];
   let filePath = path.join(distPath, reqUrl === '/' ? 'index.html' : reqUrl);
-  if (!fs.existsSync(filePath)) {
+  if (!fs.existsSync(filePath) || fs.statSync(filePath).isDirectory()) {
     filePath = path.join(distPath, 'index.html');
   }
   const ext = path.extname(filePath);
@@ -36,7 +33,7 @@ const server = http.createServer((req, res) => {
 });
 
 server.listen(4173, async () => {
-  console.log('Dist preview server running on http://localhost:4173/CINEMATIC-CHARACTER-ARCHIVE/');
+  console.log('Dist preview server running on http://localhost:4173/');
   const browser = await chromium.launch();
   const page = await browser.newPage();
   const consoleErrors = [];
@@ -49,7 +46,7 @@ server.listen(4173, async () => {
     if (resp.status() >= 400) networkErrors.push({ url: resp.url(), status: resp.status() });
   });
 
-  await page.goto('http://localhost:4173/CINEMATIC-CHARACTER-ARCHIVE/', { waitUntil: 'networkidle' });
+  await page.goto('http://localhost:4173/', { waitUntil: 'networkidle' });
 
   // Verify English name
   const bodyTextEn = await page.textContent('body');

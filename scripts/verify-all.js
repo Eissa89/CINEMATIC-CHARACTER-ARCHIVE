@@ -1,7 +1,8 @@
 import { chromium } from 'playwright';
 
 async function verifyAll() {
-  console.log('Starting verification against http://localhost:3000/CINEMATIC-CHARACTER-ARCHIVE/...');
+  const baseUrl = process.env.TARGET_URL || 'http://localhost:4173/';
+  console.log(`Starting verification against ${baseUrl}...`);
   const browser = await chromium.launch({ headless: true });
   const context = await browser.newContext();
   const page = await context.newPage();
@@ -24,7 +25,7 @@ async function verifyAll() {
     }
   });
 
-  const response = await page.goto('http://localhost:3000/CINEMATIC-CHARACTER-ARCHIVE/', { waitUntil: 'networkidle' });
+  const response = await page.goto(baseUrl, { waitUntil: 'networkidle' });
   console.log('Status code:', response.status());
 
   if (response.status() !== 200) {
