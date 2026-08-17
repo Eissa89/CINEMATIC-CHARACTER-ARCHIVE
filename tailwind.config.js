@@ -12,12 +12,15 @@ export default {
         sans: ['Inter', 'sans-serif'],
       },
       colors: {
-        racing: {
-          red: 'var(--color-primary)',
-          yellow: 'var(--color-secondary)',
-          dark: 'var(--color-bg)',
-          card: 'var(--color-card)',
-          border: 'var(--color-border)',
+        character: {
+          primary: 'var(--character-primary)',
+          secondary: 'var(--character-secondary)',
+          bg: 'var(--character-bg)',
+          surface: 'var(--character-surface)',
+          card: 'var(--character-card)',
+          border: 'var(--character-border)',
+          glow: 'var(--character-glow)',
+          focus: 'var(--character-focus)',
         }
       }
     },
